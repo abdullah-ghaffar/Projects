@@ -1,26 +1,33 @@
-// 1. Importing our Machines
 import { normalizeInvoices } from './services/stripe-service.js';
-import { getTenantInvoices } from './services/tenant-service.js';
+import { reconcileInvoices } from './services/reconciliation-service.js';
+import { saveInvoices, loadInvoices } from './services/storage-service.js';
 
-// 2. Dummy Raw Data from Stripe (Imagine this came from an API)
-const stripeResponse = [
+// Dummy Stripe Data (Imagine this is from an API)
+const stripeAPIInvoices = [
     { id: 'in_001', amount_paid: 5000, customer: 'cus_A', currency: 'usd', status: 'paid', tenant_id: 'netflix_01' },
     { id: 'in_002', amount_paid: 2000, customer: 'cus_B', currency: 'usd', status: 'paid', tenant_id: 'spotify_02' },
-    { id: 'in_003', amount_paid: 15000, customer: 'cus_C', currency: 'usd', status: 'open', tenant_id: 'netflix_01' }
+    { id: 'in_003', amount_paid: 15000, customer: 'cus_C', currency: 'usd', status: 'open', tenant_id: 'netflix_01' },
+    { id: 'in_004', amount_paid: 3000, customer: 'cus_D', currency: 'usd', status: 'paid', tenant_id: 'netflix_01' },
+    { id: 'in_005', amount_paid: 9000, customer: 'cus_E', currency: 'usd', status: 'paid', tenant_id: 'spotify_02' }
 ];
 
-// --- THE EXECUTION PIPELINE ---
+async function startSync() {
+    console.log("Starting SaaS Billing Sync...");
 
-console.log("--- Starting Billing Sync ---");
+    // 1. Load what we already have
+    const localData = await loadInvoices();
+    
+    // 2. Find only the new stuff
+    const { newItems } = reconcileInvoices(stripeAPIInvoices, localData);
 
-// Step 1: Normalize (Cleaning the data)
-const cleanData = normalizeInvoices(stripeResponse);
-console.log("Step 1 Done: Data Normalized (Cents converted to Dollars)");
+    if (newItems.length > 0) {
+        // 3. Clean & Save
+        const cleanData = normalizeInvoices(newItems);
+        await saveInvoices(cleanData);
+        console.log(`✅ Success: ${newItems.length} new invoices synced.`);
+    } else {
+        console.log("No new invoices found. Everything is up to date.");
+    }
+}
 
-// Step 2: Tenant Isolation (Securing the data for Netflix)
-const targetTenant = 'netflix_01';
-const finalResult = getTenantInvoices(cleanData, targetTenant);
-
-// 3. Final Output
-console.log(`Step 2 Done: Found ${finalResult.length} invoices for ${targetTenant}`);
-console.log("Final Data for Database:", finalResult);
+startSync().catch(console.error);

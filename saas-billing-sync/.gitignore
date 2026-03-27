@@ -1,0 +1,4 @@
+node_modules/
+.env
+data/*.json
+# Is se data folder ki saari JSON files ignore ho jayengi
