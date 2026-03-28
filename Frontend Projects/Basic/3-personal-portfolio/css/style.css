@@ -1,0 +1,132 @@
+/* 1. Basic Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 2. Header & Navigation (Flexbox) */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-box {
+    width: 40px;
+    height: 40px;
+    background-color: #333; /* Dark Square Box from Mockup */
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* 3. Hero Section */
+.hero {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* 4. Main Content Grid (3 Columns) */
+.content-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on mobile */
+    gap: 30px;
+    padding: 40px 0;
+}
+
+.content-grid section {
+    flex: 1; /* Each column takes equal space */
+    min-width: 250px; /* Forces wrap if space is less */
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+/* 5. Reviews Section (Horizontal Cards) */
+.reviews {
+    padding: 40px 0;
+}
+
+.review-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    flex: 1;
+    min-width: 280px;
+    border: 2px solid #333;
+    border-radius: 20px; /* Rounded boxes from mockup */
+    padding: 25px;
+    background-color: #f9f9f9;
+}
+
+.reviewer {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #666;
+}
+
+/* 6. Footer */
+.main-footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.9rem;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* 7. Responsive Media Query (Mobile) */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .main-nav {
+        margin-top: 20px;
+    }
+
+    .content-grid {
+        flex-direction: column;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+}
