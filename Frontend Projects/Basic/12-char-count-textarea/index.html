@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Character Counter</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="wrapper">
+        <label for="message">Write your Message</label>
+        
+        <div class="textarea-container" id="container">
+            <textarea 
+                id="message" 
+                placeholder="Start typing ..." 
+                maxlength="250"></textarea>
+            
+            <div class="counter-box">
+                <span id="current">0</span> / <span id="max">250</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
