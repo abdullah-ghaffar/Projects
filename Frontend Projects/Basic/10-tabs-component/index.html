@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tabs Component</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="tabs-container">
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-target="tab1">First Tab</button>
+            <button class="tab-btn" data-target="tab2">Second Tab</button>
+            <button class="tab-btn" data-target="tab3">Third Tab</button>
+            <button class="tab-btn" data-target="tab4">Fourth Tab</button>
+        </nav>
+
+        <div class="tabs-content">
+            <div id="tab1" class="content-item active">
+                <p>First Tab content to be displayed here.</p>
+                <span class="dummy-text">This is some dummy content for the first section.</span>
+            </div>
+            <div id="tab2" class="content-item">
+                <p>Second Tab content to be displayed here.</p>
+                <span class="dummy-text">Explaining the second concept with simple text.</span>
+            </div>
+            <div id="tab3" class="content-item">
+                <p>Third Tab content to be displayed here.</p>
+                <span class="dummy-text">Data for the third tab is rendered successfully.</span>
+            </div>
+            <div id="tab4" class="content-item">
+                <p>Fourth Tab content to be displayed here.</p>
+                <span class="dummy-text">Final tab content for the component.</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
