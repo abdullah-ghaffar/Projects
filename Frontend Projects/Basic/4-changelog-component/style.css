@@ -1,0 +1,78 @@
+/* 1. Header Alignment Fix */
+.changelog-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Sab kuch horizontally center rakhta hai */
+    margin-bottom: 0;
+}
+
+.changelog-header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+.changelog-header p {
+    color: #999;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 5;
+    background: #fff; /* Text ke niche line na dikhe */
+    padding-bottom: 10px;
+}
+
+/* 2. Timeline & Line Fix */
+.timeline {
+    position: relative;
+    width: 100%;
+    margin-top: -5px; /* Line ko subtitle ke 'g' ke bilkul kareeb lane ke liye */
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; /* Ab ye header ke 'p' tag ke bilkul niche se start hogi */
+    bottom: 0;
+    width: 2px;
+    background-color: #000;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* 3. Items Alignment */
+.timeline-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+/* Left Side (Date) */
+.date {
+    flex: 1;
+    text-align: right;
+    padding-right: 50px; /* Line se barabar fasla */
+    color: #bbb;
+}
+
+/* Center (Dot) */
+.dot {
+    width: 16px;
+    height: 16px;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    border: 3px solid #fff; /* Clear look on the line */
+}
+
+/* Right Side (Content) */
+.content {
+    flex: 1;
+    text-align: left;
+    padding-left: 50px; /* Line se barabar fasla */
+    font-weight: 500;
+}
