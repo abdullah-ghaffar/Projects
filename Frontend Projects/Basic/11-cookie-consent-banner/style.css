@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    overflow-x: hidden;
+}
+
+/* Dummy Content Styles */
+.page-content {
+    padding: 50px;
+    opacity: 0.3; /* Background ko halka rakha hai mockup ki tarah */
+}
+
+.dummy-header { height: 40px; background: #ddd; margin-bottom: 20px; width: 100%; }
+.dummy-hero { height: 200px; background: #eee; border-radius: 10px; margin-bottom: 30px; }
+.block { height: 20px; background: #ddd; margin-bottom: 10px; width: 60%; }
+
+/* --- Cookie Banner Container --- */
+.cookie-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 320px;
+    background-color: #000;
+    color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+    display: none; /* JavaScript se show hoga agar consent na ho */
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.close-x {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cookie-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.cookie-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.accept-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.accept-btn:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
