@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laneit • Reddit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Laneit</h1>
+    <p>Your Personal Reddit Dashboard</p>
+    <button id="add-lane-btn" class="add-btn">+ Add Subreddit</button>
+  </div>
+
+  <div class="lanes-container" id="lanes-container"></div>
+
+  <!-- Add Subreddit Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>Add New Subreddit</h2>
+      <input type="text" id="subreddit-input" placeholder="e.g. programming, pakistan, memes" autocomplete="off">
+      <div class="popup-buttons">
+        <button id="cancel-btn">Cancel</button>
+        <button id="add-btn">Add Subreddit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
