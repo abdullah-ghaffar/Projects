@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24h Stories Feature</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <div class="stories-header" id="stories-header">
+            <div class="story-item add-story">
+                <label for="file-upload" class="add-btn">+</label>
+                <input type="file" id="file-upload" accept="image/*" />
+            </div>
+            <div id="stories-list" class="stories-list"></div>
+        </div>
+        <div class="feed-placeholder">
+            <p>Your main feed goes here...</p>
+        </div>
+    </div>
+
+    <div class="story-viewer" id="story-viewer">
+        <div class="progress-container" id="progress-container"></div>
+        <img id="story-image" src="" alt="Story">
+        
+        <div class="nav-area left" id="nav-left"></div>
+        <div class="nav-area right" id="nav-right"></div>
+        
+        <button class="close-btn" id="close-btn">&times;</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
