@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+}
+
+.tracker-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Input Area */
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 5px 15px;
+    margin-bottom: 30px;
+}
+
+#taskInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+#addBtn {
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transform: rotate(90deg); /* Mirroring the enter icon */
+}
+
+/* Task List */
+ul {
+    list-style: none;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    transition: opacity 0.3s ease;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+/* Checkbox Styling */
+.checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    margin-right: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-item.completed .checkbox {
+    background-color: #888;
+    border-color: #888;
+}
+
+.task-item.completed .checkbox::after {
+    content: "";
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.task-text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Completed State */
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.delete-btn:hover {
+    color: #ff4d4d;
+}
