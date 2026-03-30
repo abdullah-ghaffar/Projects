@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.converter-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 850px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.input-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+input, select {
+    padding: 12px 15px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    min-width: 120px;
+}
+
+input {
+    width: 100px;
+}
+
+select {
+    width: 160px;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+.result-text {
+    margin-top: 30px;
+    font-size: 1.1rem;
+    color: #2e7d32; /* Green color for result */
+    font-weight: 500;
+    min-height: 24px;
+}
