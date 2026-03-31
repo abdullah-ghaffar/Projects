@@ -1,0 +1,14 @@
+{
+  "name": "github-activity-cli",
+  "version": "1.0.0",
+  "description": "Fetch GitHub user activity from the terminal",
+  "main": "index.js",
+  "bin": {
+    "github-activity": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Abdullah Ghaffar",
+  "license": "ISC"
+}
