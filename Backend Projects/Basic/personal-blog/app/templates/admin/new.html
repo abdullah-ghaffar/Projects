@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>New Article</h1>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: green;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(size=80) }}
+        {% for error in form.title.errors %}
+            <span style="color: red;">{{ error }}</span><br>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.publish_date.label }}<br>
+        {{ form.publish_date }}
+        {% for error in form.publish_date.errors %}
+            <span style="color: red;">{{ error }}</span><br>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.content.label }}<br>
+        {{ form.content(rows=15, cols=80) }}
+        {% for error in form.content.errors %}
+            <span style="color: red;">{{ error }}</span><br>
+        {% endfor %}
+    </p>
+
+    <button type="submit">Publish Article</button>
+    <a href="{{ url_for('admin.dashboard') }}">Cancel</a>
+</form>
+
+{% endblock %}

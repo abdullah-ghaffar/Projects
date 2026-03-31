@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Personal Blog <a href="{{ url_for('admin.new_article') }}" class="add-btn">+ Add New Article</a></h1>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li style="color: green;">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% if articles %}
+  {% for article in articles %}
+  <div class="article-row">
+      <span><strong>{{ article.title }}</strong> — {{ article.publish_date.strftime('%B %d, %Y') }}</span>
+      <div>
+          <a href="{{ url_for('admin.edit_article', article_id=article.id) }}">Edit</a> |
+          <form action="{{ url_for('admin.delete_article', article_id=article.id) }}" method="POST" style="display:inline;">
+              <button type="submit" class="delete-btn" onclick="return confirm('Delete this article?')">Delete</button>
+          </form>
+      </div>
+  </div>
+  {% endfor %}
+{% else %}
+  <p>No articles yet. Click "+ Add New Article" to create one.</p>
+{% endif %}
+
+<a href="{{ url_for('admin.logout') }}">Logout</a>
+{% endblock %}

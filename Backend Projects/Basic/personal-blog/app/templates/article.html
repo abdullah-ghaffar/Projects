@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+<p class="date">{{ article.publish_date.strftime('%B %d, %Y') }}</p>
+<div class="content">
+    <p>{{ article.content | replace('\n', '</p><p>') | safe }}</p>
+</div>
+<a href="/">← Back to Home</a>
+{% endblock %}
