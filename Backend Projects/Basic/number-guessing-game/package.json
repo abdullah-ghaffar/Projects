@@ -1,0 +1,13 @@
+{
+  "name": "number-guessing-game",
+  "version": "1.0.0",
+  "description": "Fun CLI Number Guessing Game in JavaScript",
+  "main": "number-guessing.js",
+  "scripts": {
+    "start": "node number-guessing.js",
+    "play": "node number-guessing.js"
+  },
+  "author": "You",
+  "license": "MIT",
+  "type": "module"   
+}
