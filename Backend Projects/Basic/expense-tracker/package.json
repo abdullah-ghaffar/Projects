@@ -1,0 +1,18 @@
+{
+  "name": "expense-tracker",
+  "version": "1.0.0",
+  "description": "Simple & Powerful Expense Tracker CLI",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "expense-tracker": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "chalk": "^5.3.0",
+    "date-fns": "^3.6.0"
+  }
+}
