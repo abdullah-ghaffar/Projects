@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', system_ui, sans-serif; }
+    .tab-active { border-bottom: 3px solid #3b82f6; color: #1e40af; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-12">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-center mb-8">
+      <h1 class="text-5xl font-bold text-gray-800 tracking-tight">Unit Converter</h1>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <!-- LEFT: Input Form -->
+      <div class="bg-white border-2 border-gray-800 rounded-3xl p-8 shadow-xl">
+        <div class="flex gap-8 border-b mb-8">
+          <button onclick="switchCategory(0)" id="tab-0"
+            class="tab-active pb-2 text-lg font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-ruler"></i> Length
+          </button>
+          <button onclick="switchCategory(1)" id="tab-1"
+            class="pb-2 text-lg font-semibold flex items-center gap-2 hover:text-blue-600 transition">
+            <i class="fa-solid fa-weight-hanging"></i> Weight
+          </button>
+          <button onclick="switchCategory(2)" id="tab-2"
+            class="pb-2 text-lg font-semibold flex items-center gap-2 hover:text-blue-600 transition">
+            <i class="fa-solid fa-temperature-half"></i> Temperature
+          </button>
+        </div>
+
+        <div id="form-area">
+          <p id="input-label" class="text-xl font-medium mb-3">Enter the length to convert</p>
+          
+          <input type="number" id="value" value="20" 
+            class="w-full border-2 border-gray-300 rounded-2xl px-5 py-4 text-2xl focus:outline-none focus:border-blue-500 mb-8">
+
+          <!-- From -->
+          <p class="text-sm font-medium text-gray-500 mb-2">Unit to Convert from</p>
+          <select id="from" class="w-full border-2 border-gray-300 rounded-2xl px-5 py-4 text-lg mb-8 focus:outline-none focus:border-blue-500"></select>
+
+          <!-- To -->
+          <p class="text-sm font-medium text-gray-500 mb-2">Unit to Convert to</p>
+          <select id="to" class="w-full border-2 border-gray-300 rounded-2xl px-5 py-4 text-lg mb-8 focus:outline-none focus:border-blue-500"></select>
+
+          <button onclick="convert()"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xl py-5 rounded-2xl transition">
+            Convert
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Result -->
+      <div class="bg-white border-2 border-gray-800 rounded-3xl p-8 shadow-xl flex flex-col">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-2xl font-semibold">Result of your calculation</h2>
+          <button onclick="resetConverter()" 
+            class="px-6 py-3 border-2 border-gray-800 rounded-2xl font-medium hover:bg-gray-100 transition flex items-center gap-2">
+            <i class="fa-solid fa-rotate-right"></i> Reset
+          </button>
+        </div>
+
+        <div id="result-box" class="flex-1 flex items-center justify-center text-center">
+          <div id="result-content" class="text-5xl font-semibold text-gray-800 leading-tight">
+            20 ft = 609.6 cm
+          </div>
+        </div>
+
+      
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data for each category
+    const categories = [
+      { name: "Length", label: "Enter the length to convert", base: "meter",
+        units: {
+          "millimeter": 0.001,
+          "centimeter": 0.01,
+          "meter": 1,
+          "kilometer": 1000,
+          "inch": 0.0254,
+          "foot": 0.3048,
+          "yard": 0.9144,
+          "mile": 1609.34
+        }
+      },
+      { name: "Weight", label: "Enter the weight to convert", base: "gram",
+        units: {
+          "milligram": 0.001,
+          "gram": 1,
+          "kilogram": 1000,
+          "ounce": 28.3495,
+          "pound": 453.592
+        }
+      },
+      { name: "Temperature", label: "Enter the temperature to convert", base: "celsius",
+        units: { "Celsius": "C", "Fahrenheit": "F", "Kelvin": "K" }
+      }
+    ];
+
+    let currentCategory = 0;
+
+    function populateSelects() {
+      const fromSelect = document.getElementById("from");
+      const toSelect = document.getElementById("to");
+      
+      fromSelect.innerHTML = '';
+      toSelect.innerHTML = '';
+
+      const units = categories[currentCategory].units;
+      
+      Object.keys(units).forEach(unit => {
+        const opt1 = document.createElement("option");
+        opt1.value = unit;
+        opt1.textContent = unit;
+        fromSelect.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = unit;
+        opt2.textContent = unit;
+        toSelect.appendChild(opt2);
+      });
+
+      // Default values (match image example)
+      if (currentCategory === 0) {
+        fromSelect.value = "foot";
+        toSelect.value = "centimeter";
+      }
+    }
+
+    function switchCategory(index) {
+      currentCategory = index;
+      document.querySelectorAll('button[id^="tab-"]').forEach((btn, i) => {
+        btn.classList.toggle('tab-active', i === index);
+      });
+      document.getElementById("input-label").textContent = categories[index].label;
+      populateSelects();
+      document.getElementById("result-content").innerHTML = `
+        <div class="text-4xl text-gray-400">Select units &amp; hit Convert</div>
+      `;
+    }
+
+    function convert() {
+      const value = parseFloat(document.getElementById("value").value);
+      if (!value && value !== 0) {
+        alert("Please enter a valid number");
+        return;
+      }
+
+      const fromUnit = document.getElementById("from").value;
+      const toUnit = document.getElementById("to").value;
+
+      const cat = categories[currentCategory];
+      let result = 0;
+
+      if (cat.name === "Temperature") {
+        // Temperature conversion
+        let celsius;
+        if (fromUnit === "Celsius") celsius = value;
+        else if (fromUnit === "Fahrenheit") celsius = (value - 32) * 5/9;
+        else celsius = value - 273.15;
+
+        if (toUnit === "Celsius") result = celsius;
+        else if (toUnit === "Fahrenheit") result = celsius * 9/5 + 32;
+        else result = celsius + 273.15;
+      } else {
+        // Length & Weight (linear)
+        const fromFactor = cat.units[fromUnit];
+        const toFactor = cat.units[toUnit];
+        result = (value * fromFactor) / toFactor;
+      }
+
+      // Display result exactly like the image
+      const resultHTML = `
+        <span class="text-6xl font-bold">${value}</span> 
+        <span class="text-5xl text-gray-400 mx-3">${fromUnit}</span> 
+        <span class="text-4xl">=</span> 
+        <span class="text-6xl font-bold">${result.toFixed(2)}</span> 
+        <span class="text-5xl text-gray-400 mx-3">${toUnit}</span>
+      `;
+      document.getElementById("result-content").innerHTML = resultHTML;
+    }
+
+    function resetConverter() {
+      document.getElementById("value").value = "20";
+      switchCategory(currentCategory); // reset selects
+      document.getElementById("result-content").innerHTML = `
+        <div class="text-4xl text-gray-400">Your result will appear here</div>
+      `;
+    }
+
+    // Initialize
+    window.onload = () => {
+      populateSelects();
+    };
+  </script>
+</body>
+</html>
