@@ -1,0 +1,10 @@
+# Yeh files GitHub pe NAHI jaayengi
+
+# API Key - SECRET hai
+config.py
+
+# Python cache - auto banti hai
+__pycache__/
+
+# Results - har baar nai banti hain
+*.json
