@@ -1,24 +1,9 @@
-```
-# Personal Blog - Flask
-
-Ek simple aur clean Personal Blog jisme aap articles likh, publish, edit aur delete kar sakte hain.
-
-## Features
-- Home page pe published articles ki list
-- Individual article page
-- Admin Dashboard (Add, Edit, Delete)
-- Basic Login System
-- Articles filesystem (JSON) mein save hote hain
-- No JavaScript, sirf HTML + CSS + Flask
-
----
-
-## Installation & Setup (Windows)
+### Installation & Setup (Windows)
 
 ### 1. Project Folder Mein Jaayein
-```powershell
+
 cd personal-blog
-```
+
 
 ### 2. Virtual Environment Banao
 
