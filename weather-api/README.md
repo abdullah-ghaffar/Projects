@@ -4,21 +4,23 @@ A weather API that fetches and returns weather data from Visual Crossing API wit
 
 ## Architecture
 
+```
 Client Request
-│
-▼
+     │
+     ▼
 ┌─────────────┐     ┌──────────────┐
 │  Flask API   │────▶│  Cache Layer │
 │  + Rate      │     │  (Redis or   │
 │  Limiter     │     │  In-Memory)  │
 └──────┬──────┘     └──────────────┘
-│                    │
-│  Cache Miss        │ Cache Hit
-▼                    ▼
+       │                    │
+       │  Cache Miss        │ Cache Hit
+       ▼                    ▼
 ┌─────────────┐      Return cached
 │ Visual       │      response
 │ Crossing API │
 └─────────────┘
+```
 
 ## Features
 
@@ -54,81 +56,54 @@ cp .env.example .env
 python app.py
 ```
 
-
 ## API Endpoints
 
-| Method | Endpoint            | Description            |
-| ------ | ------------------- | ---------------------- |
-| GET    | `/`               | API info and usage     |
-| GET    | `/weather/<city>` | Get weather for a city |
-| GET    | `/health`         | Health check           |
-| POST   | `/cache/clear`    | Clear cache            |
-
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | API info and usage |
+| GET | `/weather/<city>` | Get weather for a city |
+| GET | `/health` | Health check |
+| POST | `/cache/clear` | Clear cache |
 
 ## Example
 
-Get weather for Lahore
-
 ```bash
+# Get weather for Lahore
 curl http://localhost:3000/weather/Lahore
 ```
 
 Response:
-
-```
+```json
 {
-  "city":"Lahore, Punjab, Pakistan",
-  "current":{
-    "temperature_c":35.2,
-    "humidity":45,
-    "conditions":"Clear",
-    "wind_speed_kph":12.5
+  "city": "Lahore, Punjab, Pakistan",
+  "current": {
+    "temperature_c": 35.2,
+    "humidity": 45,
+    "conditions": "Clear",
+    "wind_speed_kph": 12.5
   },
-  "forecast":[...],
-  "source":"api"
+  "forecast": ["..."],
+  "source": "api"
 }
 ```
 
 Second request returns from cache:
-
-```
+```json
 {
   "source": "cache"
 }
 ```
 
-
 ## Tech Stack
 
-* **Python 3.12** + **Flask** — API framework
-* **Visual Crossing API** — Weather data (free tier)
-* **Redis** — Caching (optional, falls back to in-memory)
-* **Flask-Limiter** — Rate limiting
+- **Python 3.12** + **Flask** — API framework
+- **Visual Crossing API** — Weather data (free tier)
+- **Redis** — Caching (optional, falls back to in-memory)
+- **Flask-Limiter** — Rate limiting
 
 ## Environment Variables
 
-| Variable            | Description             |
-| ------------------- | ----------------------- |
+| Variable | Description |
+|----------|-------------|
 | `WEATHER_API_KEY` | Visual Crossing API key |
-| `REDIS_URL`       | Redis connection string |
-
-
-## RUN & TEST! 🚀
-
-Terminal 1: Start server
-
-pythonapp.py
-
-==================================================
-🌤️  Weather API Starting...
-📦 Cache: In-Memory
-🔑 API Key: ✅ Set
-
-* Running on http://127.0.0.1:3000
-
-**Browser mein test karo:**
-
-http://localhost:3000/
-http://localhost:3000/weather/Lahore
-http://localhost:3000/weather/London
-http://localhost:3000/health
+| `REDIS_URL` | Redis connection string |
